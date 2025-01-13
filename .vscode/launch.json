@@ -6,6 +6,7 @@
     "configurations": [
         {
             "name": "Python デバッガー: Flask",
+            "type": "debugpy",
             "request": "launch",
             "module": "flask",
             "env": {
