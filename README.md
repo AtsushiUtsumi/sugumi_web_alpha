@@ -12,5 +12,5 @@ fly deploy
 
 ## 開く
 ```
-fly open
+fly apps open
 ```
