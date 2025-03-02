@@ -15,5 +15,5 @@ def hello(name=None):
     lines = file.readlines()
     file.close()
     if len(lines) > 0:
-        return render_template('hello.html', name=lines)
+        return render_template('jss.html', name=lines)
     return render_template('hello.html', name=name)

@@ -1,0 +1,17 @@
+<html>
+<script src="{{ url_for('static', filename='js/jspreadsheet/jspreadsheet.js') }}"></script>
+<script src="https://jsuites.net/v5/jsuites.js"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='js/jspreadsheet/jspreadsheet.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='js/jspreadsheet/jspreadsheet.themes.css') }}">
+<link rel="stylesheet" href="https://jsuites.net/v5/jsuites.css" type="text/css" />
+<div id='spreadsheet'></div>
+
+<script>
+// Create a new spreadsheet
+jspreadsheet(document.getElementById('spreadsheet'), {
+    worksheets: [{
+        minDimensions: [7,7],
+    }]
+});
+</script>
+</html>
