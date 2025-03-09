@@ -1,113 +1,135 @@
-<html>
-<script src="{{ url_for('static', filename='jspreadsheet/jspreadsheet.js') }}"></script>
-<script src="{{ url_for('static', filename='jsuites/jsuites.js') }}"></script>
-<link rel="stylesheet" href="{{ url_for('static', filename='jspreadsheet/jspreadsheet.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='jspreadsheet/jspreadsheet.themes.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='jsuites/jsuites.css') }}" type="text/css" />
-<div id='spreadsheet'></div>
+<!DOCTYPE html>
+<html lang="ja">
 
-<script>
-    // Create a new spreadsheet
-    const worksheet = {
-        nestedHeaders: [
-            [
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SUGUMI-WEB</title>
+    <script src="{{ url_for('static', filename='jspreadsheet/jspreadsheet.js') }}"></script>
+    <script src="{{ url_for('static', filename='jsuites/jsuites.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='jspreadsheet/jspreadsheet.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='jspreadsheet/jspreadsheet.themes.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='jsuites/jsuites.css') }}" type="text/css" />
+</head>
+
+<body style="background-color: #666666;margin: 0;">
+    <div style="background-color: #333333;width: 100%;height: 50px;text-align: center;display: flex;justify-content: center;">
+        <div style="align-self: center;font-size: 30px;color: orange">SUGUMI-WEB</div>
+    </div>
+    <div id='spreadsheet'></div>
+
+    <script>
+        // Create a new spreadsheet
+        const worksheet = {
+            nestedHeaders: [
+                [
+                    {
+                        title: 'Supermarket information',
+                        colspan: '4',
+                    },
+                ],
+                [
+                    {
+                        title: 'Location',
+                        colspan: '2',
+                    },
+                    {
+                        title: ' Other Information',
+                        colspan: '1'
+                    },
+                    {
+                        title: ' Costs',
+                        colspan: '1'
+                    }
+                ],
+            ],
+            data: [
+                ['US', 'Wholemeal', 'Yes', '2019-02-12'],
+                ['CA;US;GB', 'Breakfast', 'Yes', '2019-03-01'],
+                ['CA;BR', 'Grains', 'No', '2018-11-10'],
+                ['BR', 'Pasta', 'Yes', '2019-01-12'],
+            ],
+            columns: [
+                { type: 'dropdown', title: 'Product Origin', source: ['No', 'Yes'] },
+                { type: 'text', title: 'Description' },
+                { type: 'dropdown', title: 'Stock', source: ['No', 'Yes'] },
+                { type: 'calendar', title: 'Best before', format: 'DD/MM/YYYY' },
+            ],
+            allowDeleteColumn: false,
+            allowRenameColumn: false,
+            allowInsertRow: false,
+            allowDeleteRow: false,
+            allowComments: false,
+            worksheetId: 'A',
+            worksheetName: 'モデル',
+            defaultColWidth: '300px',
+            filters: false,
+            footers: [
+                ['US', 'Wholemeal', 'Yes', '2019-02-12'],
+                ['CA;US;GB', 'Breakfast', 'Yes', '2019-03-01'],
+                ['CA;BR', 'Grains', 'No', '2018-11-10'],
+                ['BR', 'Pasta', 'Yes', '2019-01-12'],
+            ],
+            columnSorting: true,
+            textOverflow: true,
+            columnDrag: false,
+            columnResize: false,
+            rowDrag: false,
+            rowResize: false,
+            search: true,
+        }
+        const sheet = jspreadsheet(document.getElementById('spreadsheet'), {
+            worksheets: [
+                worksheet,
                 {
-                    title: 'Supermarket information',
-                    colspan: '4',
+                    minDimensions: [7, 7], data: [
+                        ['US', 'Wholemeal', 'Yes', '2019-02-12'],
+                        ['CA', 'Breakfast', 'Yes', '2019-03-01'],
+                        ['BR', 'Grains', 'No', '2018-11-10'],
+                        ['BR', 'Pasta', 'Yes', '2019-01-12'],
+                    ],
+                    search: true,
+                    worksheetId: 'hoge',
+                    worksheetName: 'ビュー',
+                },
+                {
+                    minDimensions: [5, 5],
+                    search: true,
+                    worksheetId: 'fuga',
+                    worksheetName: 'コントローラー',
                 },
             ],
-            [
-                {
-                    title: 'Location',
-                    colspan: '2',
-                },
-                {
-                    title: ' Other Information',
-                    colspan: '1'
-                },
-                {
-                    title: ' Costs',
-                    colspan: '1'
-                }
-            ],
-        ],
-        data: [
-            ['US', 'Wholemeal', 'Yes', '2019-02-12'],
-            ['CA;US;GB', 'Breakfast', 'Yes', '2019-03-01'],
-            ['CA;BR', 'Grains', 'No', '2018-11-10'],
-            ['BR', 'Pasta', 'Yes', '2019-01-12'],
-        ],
-        columns: [
-            { type: 'dropdown', title: 'Product Origin', source: ['No', 'Yes'] },
-            { type: 'text', title: 'Description' },
-            { type: 'dropdown', title: 'Stock', source: ['No', 'Yes'] },
-            { type: 'calendar', title: 'Best before', format: 'DD/MM/YYYY' },
-        ],
-        allowDeleteColumn: false,
-        allowRenameColumn: false,
-        allowInsertRow: false,
-        allowDeleteRow: false,
-        allowComments: false,
-        worksheetId: 'hoge',
-        worksheetName: 'hoge',
-        defaultColWidth: '300px',
-        filters: false,
-        footers: [
-            ['US', 'Wholemeal', 'Yes', '2019-02-12'],
-            ['CA;US;GB', 'Breakfast', 'Yes', '2019-03-01'],
-            ['CA;BR', 'Grains', 'No', '2018-11-10'],
-            ['BR', 'Pasta', 'Yes', '2019-01-12'],
-        ],
-        columnSorting: true,
-        textOverflow: true,
-        columnDrag: false,
-        columnResize: false,
-        rowDrag: false,
-        rowResize: false,
-        search: true,
-    }
-    const sheet = jspreadsheet(document.getElementById('spreadsheet'), {
-        worksheets: [
-            worksheet,
-            {
-                minDimensions: [7, 7],
-                search: true,
-                worksheetId: 'hoge',
-                worksheetName: 'hoge',
+            onchange: function (sheet, cell) {
+                console.log('変更されたシートのデータ取得');
+                console.log(sheet.getData());
+                console.log(sheet);
             },
-            {
-                minDimensions: [5, 5],
-                search: true,
-                worksheetId: 'fuga',
-                worksheetName: 'fuga',
-            },
-        ],
-        onchange: function(sheet, cell) {console.log(sheet);console.log(cell);},
-    });
+        });
 
-    const getMethods = (obj) => {
-        const getOwnMethods = (obj) =>
-            Object.entries(Object.getOwnPropertyDescriptors(obj))
-                .filter(([name, { value }]) => typeof value === 'function' && name !== 'constructor')
-                .map(([name]) => name)
-        const _getMethods = (o, methods) =>
-            o === Object.prototype ? methods : _getMethods(Object.getPrototypeOf(o), methods.concat(getOwnMethods(o)))
-        return _getMethods(obj, [])
-    }
+        const getMethods = (obj) => {
+            const getOwnMethods = (obj) =>
+                Object.entries(Object.getOwnPropertyDescriptors(obj))
+                    .filter(([name, { value }]) => typeof value === 'function' && name !== 'constructor')
+                    .map(([name]) => name)
+            const _getMethods = (o, methods) =>
+                o === Object.prototype ? methods : _getMethods(Object.getPrototypeOf(o), methods.concat(getOwnMethods(o)))
+            return _getMethods(obj, [])
+        }
 
-    for (var tmp of getMethods(sheet[0])) {
-        //if (!tmp.startsWith('get') && !tmp.startsWith('set')) console.log(tmp);
-    }
-    for (var tmp of getMethods(sheet[0])) {
-        //if (tmp.startsWith('get')) console.log(tmp);
-    }
-    for (var tmp of getMethods(sheet[0])) {
-        //if (tmp.startsWith('set')) console.log(tmp);
-    }
-    console.log(sheet[0].getConfig());
-    console.log('====================================');
-    console.log(sheet[0]);
-    sheet[0].hideRow(2);
-</script>
+        for (var tmp of getMethods(sheet[0])) {
+            //if (!tmp.startsWith('get') && !tmp.startsWith('set')) console.log(tmp);
+        }
+        for (var tmp of getMethods(sheet[0])) {
+            //if (tmp.startsWith('get')) console.log(tmp);
+        }
+        for (var tmp of getMethods(sheet[0])) {
+            //if (tmp.startsWith('set')) console.log(tmp);
+        }
+        // console.log(sheet[0].getConfig());
+        // console.log('====================================');
+        // console.log(sheet[0]);
+        // sheet[0].hideRow(2);
+    </script>
+</body>
 
 </html>
