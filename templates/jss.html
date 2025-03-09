@@ -1,9 +1,9 @@
 <html>
 <script src="{{ url_for('static', filename='jspreadsheet/jspreadsheet.js') }}"></script>
-<script src="https://jsuites.net/v5/jsuites.js"></script>
+<script src="{{ url_for('static', filename='jsuites/jsuites.js') }}"></script>
 <link rel="stylesheet" href="{{ url_for('static', filename='jspreadsheet/jspreadsheet.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='jspreadsheet/jspreadsheet.themes.css') }}">
-<link rel="stylesheet" href="https://jsuites.net/v5/jsuites.css" type="text/css" />
+<link rel="stylesheet" href="{{ url_for('static', filename='jsuites/jsuites.css') }}" type="text/css" />
 <div id='spreadsheet'></div>
 
 <script>
@@ -70,7 +70,16 @@
         worksheets: [
             worksheet,
             {
+                minDimensions: [7, 7],
+                search: true,
+                worksheetId: 'hoge',
+                worksheetName: 'hoge',
+            },
+            {
                 minDimensions: [5, 5],
+                search: true,
+                worksheetId: 'fuga',
+                worksheetName: 'fuga',
             },
         ],
         onchange: function(sheet, cell) {console.log(sheet);console.log(cell);},
