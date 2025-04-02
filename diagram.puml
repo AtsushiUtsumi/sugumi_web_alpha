@@ -1,0 +1,31 @@
+@startuml SUGUMI-WEB
+
+' メインアプリケーション
+class App {
+  +render(): JSX.Element
+}
+
+' ルーティング
+class Router {
+  +routes: Route[]
+}
+
+' ページコンポーネント
+class HomePage {
+  +render(): JSX.Element
+}
+
+' デプロイメント設定
+class DeploymentConfig {
+  -appName: string
+  +launch()
+  +deploy()
+  +open()
+}
+
+' 関連性
+App --> Router
+Router --> HomePage
+App --> DeploymentConfig
+
+@enduml 
