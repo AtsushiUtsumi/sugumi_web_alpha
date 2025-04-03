@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>保護されたページ</title>
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .logout-btn {
+            background-color: #dc3545;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>保護されたページ</h2>
+        <p>このページは認証が必要です。</p>
+        <button class="logout-btn" onclick="logout()">ログアウト</button>
+    </div>
+
+    <script>
+        // ログアウト処理
+        function logout() {
+            localStorage.removeItem('access_token');
+            window.location.href = '/login';
+        }
+
+        // ページ読み込み時にJWTトークンを確認
+        const token = localStorage.getItem('access_token');
+        if (!token) {
+            window.location.href = '/login';
+        }
+
+        // すべてのAPIリクエストにJWTトークンを追加
+        const originalFetch = window.fetch;
+        window.fetch = function(url, options = {}) {
+            const token = localStorage.getItem('access_token');
+            if (token) {
+                options.headers = {
+                    ...options.headers,
+                    'Authorization': `Bearer ${token}`
+                };
+            }
+            return originalFetch(url, options);
+        };
+    </script>
+</body>
+</html> 
