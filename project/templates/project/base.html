@@ -6,6 +6,11 @@
     <!-- titleを継承先で実装する -->
     <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('project.static', filename='style.css' ) }}" />
+    <style>
+        body {
+            background-color: #E6E6FA;
+        }
+    </style>
 </head>
 
 <body>
