@@ -6,11 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SUGUMI-WEB</title>
     <link rel="icon" type="image/x-icon" href="/static/image/favicon.ico">
-    <script src="{{ url_for('static', filename='jspreadsheet/jspreadsheet.js') }}"></script>
-    <script src="{{ url_for('static', filename='jsuites/jsuites.js') }}"></script>
-    <link rel="stylesheet" href="{{ url_for('static', filename='jspreadsheet/jspreadsheet.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='jspreadsheet/jspreadsheet.themes.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='jsuites/jsuites.css') }}" type="text/css" />
+    {% load static %}
+    <script src="{% static 'jspreadsheet/jspreadsheet.js' %}"></script>
+    <script src="{% static 'jsuites/jsuites.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'jspreadsheet/jspreadsheet.css' %}">
+    <link rel="stylesheet" href="{% static 'jspreadsheet/jspreadsheet.themes.css' %}">
+    <link rel="stylesheet" href="{% static 'jsuites/jsuites.css' %}" type="text/css" />
 </head>
 
 <body style="background-color: #E6E6FA;margin: 0;">

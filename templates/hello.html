@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="ja">
 <title>SUGUMI-WEB</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+{% load static %}
+<link rel="stylesheet" href="{% static 'main.css' %}">
 <body>
     {% if name %}
         <h1>{{name}}</h1>
